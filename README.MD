@@ -1,6 +1,6 @@
 # 🧠 Embeddings, Retrieval, and RAG — Complete Guide
 
-A beginner-friendly guide to understanding **embeddings**, **semantic search**, and the **RAG (Retrieval-Augmented Generation)** pipeline.
+Understanding **embeddings**, **semantic search**, and the **RAG (Retrieval-Augmented Generation)** pipeline.
 
 ---
 
@@ -8,13 +8,9 @@ A beginner-friendly guide to understanding **embeddings**, **semantic search**, 
 
 - [What are Embeddings?](#-1-what-are-embeddings)
 - [Cosine Similarity](#-cosine-similarity)
-- [Text Chunking](#-text-chunking)
 - [Top-K Retrieval](#-top-k-retrieval)
 - [RAG Pipeline](#-rag-pipeline)
 - [Vector Databases](#-vector-databases)
-- [Why RAG Matters](#-why-rag-matters)
-- [Example: Semantic Search](#-example-semantic-search)
-
 ---
 
 ## 🧠 1. What are embeddings?
