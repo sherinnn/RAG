@@ -71,6 +71,99 @@ Splitting large text into smaller pieces.
 ### ✅ Ideal Size
 **200–500 tokens**
 
+
+## 🔑 Chunking Strategies
+
+### 1. Fixed-size chunking
+Split every **N tokens** (e.g., 300)
+
+👉 Pros:
+- Simple
+- Fast
+
+❌ Cons:
+- Can break meaning mid-sentence
+
+---
+
+### 2. Sentence / Paragraph-based chunking
+
+Split using natural boundaries.
+
+👉 Pros:
+- Better semantic meaning
+
+❌ Cons:
+- Uneven chunk sizes
+
+---
+
+### 3. Sliding Window (Overlapping chunks)
+
+Example:
+- Chunk 1: tokens 0–300
+- Chunk 2: tokens 250–550
+
+
+👉 Pros:
+- Preserves context across chunks  
+- Very common in production RAG  
+
+---
+
+## 🔥 Advanced Tip: Structure-Aware Chunking
+
+👉 This is what **senior engineers actually do**
+
+Instead of:
+- Blind token splitting
+
+Do:
+- Split based on structure
+
+### Example (FAQ)
+
+Instead of breaking randomly:
+```
+Q: What is RAG?
+A: Retrieval-Augmented Generation...
+```
+
+👉 Keep each **Q&A pair as one chunk**
+
+✅ Benefits:
+- Cleaner embeddings  
+- Better retrieval accuracy  
+- More meaningful context  
+
+---
+
+## 📏 Token Limits & Chunk Sizes
+
+Why chunk size matters even more:
+
+### 🔑 Constraints
+
+1. **Embedding model limits**
+   - Example: 8k tokens max input
+
+2. **LLM context window**
+   - Includes:
+     - Query
+     - Retrieved chunks
+     - Prompt
+
+---
+
+### ⚖️ Tradeoffs
+
+- Small chunks → lose context  
+- Large chunks → lose precision  
+
+👉 New constraint:
+- Too many chunks → exceed context window  
+
+
 ---
 
 ## 🔍 Top-K Retrieval
@@ -134,6 +227,44 @@ flowchart LR
 - Rank by similarity
 - Return best matches
 
+
+## 🔄 Re-ranking (Advanced Retrieval)
+
+👉 After initial retrieval, we can improve results further.
+
+Problem:
+
+Embeddings are:
+
+- Fast ✅
+- Scalable ✅
+- But sometimes coarse ❌
+- Solution: Re-ranker model
+
+#### A re-ranker:
+
+- Takes query + chunk together
+- Scores relevance more precisely
+#### 🧱 Two-Stage Retrieval Pipeline
+##### Stage 1: Retrieve (fast)
+- Embed query
+- Search vector DB
+- Get top 20–50 candidates
+##### Stage 2: Re-rank (accurate)
+- Apply re-ranker model
+- Sort by better relevance
+- Select top few chunks
+
+```mermaid
+flowchart TD
+    A[Query] --> B[Embedding Search]
+    B --> C[Top-50 Candidates]
+    C --> D[Re-ranker Model]
+    D --> E[Top-K Refined Results]
+    E --> F[LLM Answer]
+```
+
+
 ## 🔗 Why Embeddings Matter
 - Capture meaning (not just keywords)
 - Enable semantic search
@@ -163,3 +294,4 @@ sequenceDiagram
 - They rank relevance
 - Prioritize best context
 - Improve final answers
+
