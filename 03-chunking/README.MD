@@ -2,6 +2,15 @@
 
 Splitting large text into smaller pieces.
 
+## Why do chunking?
+
+Embedding an entire document at once is a bad idea because:
+   - Long docs exceed model input limits
+   - one huge vector loses local detail
+   - search results are better when each chunk is focused
+
+Embedding APIs and models have input limits, so chunk size matters. OpenAI’s embeddings reference explicitly notes that input must stay within the model’s maximum token limits
+
 ### ⚖️ Tradeoffs
 
 | Chunk Size | Problem |
