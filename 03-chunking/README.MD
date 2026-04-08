@@ -15,11 +15,12 @@ Embedding APIs and models have input limits, so chunk size matters. OpenAI’s e
 
 | Chunk Size | Problem |
 |----------|--------|
-| Too small | Not enough context |
-| Too large | Mixed topics, poor precision |
+| Smaller chunks | More precise retrieval, less context |
+| Larger chunks | More context, Mixed topics, less precision |
 
-### ✅ Ideal Size
+### ✅ Initial experiment
 **200–500 tokens**
+**Overlap** reduces boundary problems
 
 
 ## 🔑 Chunking Strategies
@@ -62,8 +63,6 @@ Example:
 ---
 
 ## 🔥 Advanced Tip: Structure-Aware Chunking
-
-👉 This is what **senior engineers actually do**
 
 Instead of:
 - Blind token splitting
